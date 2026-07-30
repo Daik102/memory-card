@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react'
 import Card from './Card'
+import '../styles/GameBoard.css'
 
 function GameBoard() {
   const [cards, setCards] = useState([]);
@@ -48,8 +49,42 @@ function GameBoard() {
     }
   }, []);
 
+  const handleCardClick = (id) => {
+    const clickedCard = cards.find((card) => card.id === id);
+
+    if (clickedCard.isClicked) {
+      const resetCards = cards.map((card) => ({ ...card, isClicked: false }));
+      setCards(shuffleArray(resetCards));
+      setCurrentScore(0);
+    } else {
+      const updatedCards = cards.map((card) => card.id === id ? { ...card, isClicked: true } : card);
+      setCards(updatedCards);
+
+      const newScore = currentScore + 1;
+      setCurrentScore(newScore);
+
+      if (newScore > highScore) {
+        setHighScore(newScore);
+      }
+    }
+
+    function shuffleArray(array) {
+      const shuffled = [...array];
+
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+
+      return shuffled;
+    }
+
+    const reorderedCards = shuffleArray(cards);
+    setCards(reorderedCards);
+  };
+
   return (
-    <>
+    <ul className="card-grid">
       {cards.map((card) => (
         <Card
           key={card.id}
@@ -57,7 +92,7 @@ function GameBoard() {
           onCardClick={handleCardClick}
         />
       ))}
-    </>
+    </ul>
   )
 }
 
