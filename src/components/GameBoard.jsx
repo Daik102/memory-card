@@ -28,6 +28,9 @@ function GameBoard() {
     
     const fetchData = async () => {
       try {
+        setLoading(true);
+        setError(null);
+
         const accessKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
         const url = `https://api.unsplash.com/search/photos?query=nature&orientation=squarish&per_page=12&client_id=${accessKey}`;
         const response = await fetch(url, { signal });
@@ -56,9 +59,7 @@ function GameBoard() {
 
     fetchData();
 
-    return () => {
-      controller.abort();
-    }
+    return () => controller.abort();
   }, []);
 
   const handleCardClick = (id) => {
@@ -71,19 +72,18 @@ function GameBoard() {
     if (clickedCard.isClicked) {
       setGameStatus('lost');
     } else {
-      const newScore = currentScore + 1;
+      const updatedCards = cards.map((card) => card.id === id ? { ...card, isClicked: true } : card);
+      setCards(shuffleArray(updatedCards));
 
-      if (newScore === 12) {
-        setGameStatus('won');
-        setCurrentScore(newScore);
-      } else {
-        const updatedCards = cards.map((card) => card.id === id ? { ...card, isClicked: true } : card);
-        setCards(shuffleArray(updatedCards));
-        setCurrentScore(newScore);
-      }
+      const newScore = currentScore + 1;
+      setCurrentScore(newScore);
 
       if (newScore > highScore) {
         setHighScore(newScore);
+      }
+
+      if (newScore === 12) {
+        setGameStatus('won');
       }
     }
   };
@@ -94,28 +94,47 @@ function GameBoard() {
     setCurrentScore(0);
   };
 
+  if (loading) {
+    return (
+      <div className="status-container">
+        <p className="loading-text">Loading game cards...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="status-container">
+        <p className="error-text">Failed to load cards: {error}</p>
+        <button className='try-again-btn' onClick={() => window.location.reload()}>Try Again</button>
+      </div>
+    );
+  }
+
   return (
     <div className='game-board'>
-      <h1>Odin Memory Card</h1>
-      <div className='info'>
-        <div className='spacer-left'></div>
-        {gameStatus === 'playing' && (
-          <div className='spacer-center'></div>
-        )}
-        {gameStatus !== 'playing' && (
-          <div className="modal">
-            <h2 className='result'>{gameStatus === 'won' ? '🎉 You Won!' : '💥 Game Over!'}</h2>
-            <button className='play-again-btn' onClick={() => {
-              setGameStatus('playing');
-              handlePlayAgain();
-            }}>Play Again</button>
+      <header className='header'>
+        <h1 className='game-title'>Odin Memory Card</h1>
+        <div className='info-display'>
+          <div className='spacer-left'></div>
+          {gameStatus === 'playing' && (
+            <div className='spacer-center'></div>
+          )}
+          {gameStatus !== 'playing' && (
+            <div className="modal">
+              <h2 className='result'>{gameStatus === 'won' ? '🎉 You Won!' : '💥 Game Over!'}</h2>
+              <button className='play-again-btn' onClick={() => {
+                setGameStatus('playing');
+                handlePlayAgain();
+              }}>Play Again</button>
+            </div>
+          )}
+          <div className='score-container'>
+            <p>Score: {currentScore}</p>
+            <p>High Score: {highScore}</p>
           </div>
-        )}
-        <div className='score-container'>
-          <p>Score: {currentScore}</p>
-          <p>High Score: {highScore}</p>
         </div>
-      </div>
+      </header>
       <ul className="card-grid">
         {cards.map((card) => (
           <Card
