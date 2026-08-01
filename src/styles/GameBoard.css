@@ -1,0 +1,171 @@
+@font-face {
+  font-family: LimeLight-Regular;
+  src: url(../assets/Limelight-Regular.woff2) format('woff2');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: aliceblue;
+  --font: #333;
+  --purple: #663399;
+  --light-purple: #cc99ff;
+  --super-light-purple: #d5a2ff;
+  --limelight: LimeLight-Regular, Arial, Helvetica, sans-serif;
+  --arial: Arial, Helvetica, sans-serif;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-image: linear-gradient(var(--purple) 50%, var(--bg) 50%);
+  background-size: 100% 4px;
+}
+
+.dark-bg {
+  background-image: linear-gradient(var(--purple) 50%, var(--font) 50%);
+}
+
+.status-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.loading-text,
+.error-text {
+  font-size: 3.6rem;
+  font-family: var(--arial);
+}
+
+.try-again-btn {
+  font-weight: 700;
+  font-family: var(--arial);
+  background-color: var(--bg);
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 96rem;
+  margin: 4rem auto;
+  padding: 4rem 0;
+  background-color: var(--bg);
+  border-radius: 2rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.game-title {
+  margin-bottom: 1.2rem;
+  font-size: 3.6rem;
+  font-family: var(--limelight);
+  color: var(--font);
+}
+
+.info-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 6rem;
+  padding: 0 6rem;
+}
+
+.spacer-left, .score-container {
+  flex: 1;
+}
+
+.modal {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.result {
+  font-size: 1.8rem;
+  font-family: var(--limelight);
+  color: var(--font);
+}
+
+.play-again-btn,
+.try-again-btn {
+  padding: 0.2rem 0.8rem;
+  font-size: 1.6rem;
+  font-family: var(--limelight);
+  color: var(--font);
+  background-color: var(--light-purple);
+  border: none;
+  border-radius: 0.4rem;
+  box-shadow: 0.2rem 0.2rem 0.4rem var(--font);
+  cursor: pointer;
+}
+
+.play-again-btn {
+  font-family: var(--limelight);
+  background-color: var(--light-purple);
+}
+
+.play-again-btn:hover {
+  background-color: var(--super-light-purple);
+}
+
+.score-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.score-container p {
+  font-size: 2rem;
+  font-family: var(--limelight);
+  color: var(--font);
+}
+
+.card-grid {
+  display: grid;
+  gap: 2rem;
+  padding: 2rem;
+  grid-template-columns: repeat(4, 1fr);
+  list-style-type: none;
+}
+
+.card {
+  width: 20rem;
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 0.8rem;
+}
+
+.card button {
+  background-color: var(--bg);
+  border: none;
+  cursor: pointer;
+}
+
+.card button:hover {
+  opacity: 0.85;
+}
+
