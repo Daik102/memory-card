@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import Card from './Card'
 import '../styles/GameBoard.css'
@@ -96,54 +95,61 @@ function GameBoard() {
 
   if (loading) {
     return (
-      <div className="status-container">
-        <p className="loading-text">Loading game cards...</p>
+      <div className='wrapper'>
+        <div className="status-container">
+          <p className="loading-text">Loading game cards...</p>
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="status-container">
-        <p className="error-text">Failed to load cards: {error}</p>
-        <button className='try-again-btn' onClick={() => window.location.reload()}>Try Again</button>
+      <div className='wrapper'>
+        <div className="status-container">
+          <p className="error-text">Failed to load cards: {error}</p>
+          <button className='try-again-btn' onClick={() => window.location.reload()}>Try Again</button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className='game-board'>
-      <header className='header'>
-        <h1 className='game-title'>Odin Memory Card</h1>
-        <div className='info-display'>
-          <div className='spacer-left'></div>
-          {gameStatus === 'playing' && (
-            <div className='spacer-center'></div>
-          )}
-          {gameStatus !== 'playing' && (
-            <div className="modal">
-              <h2 className='result'>{gameStatus === 'won' ? '🎉 You Won!' : '💥 Game Over!'}</h2>
-              <button className='play-again-btn' onClick={() => {
-                setGameStatus('playing');
-                handlePlayAgain();
-              }}>Play Again</button>
+    <div className={`wrapper ${gameStatus}`}>
+      <div className='game-board'>
+        <header className='header'>
+          <h1 className='game-title'>Odin Memory Card</h1>
+          <div className='info-display'>
+            <div className='spacer-left'></div>
+            {gameStatus === 'playing' && (
+              <div className='spacer-center'></div>
+            )}
+            {gameStatus !== 'playing' && (
+              <div className="modal">
+                <h2 className='result'>{gameStatus === 'won' ? 'Congratulations!' : 'Game Over!'}</h2>
+                <button className='play-again-btn' onClick={() => {
+                  setGameStatus('playing');
+                  handlePlayAgain();
+                }}>Play Again</button>
+              </div>
+            )}
+            <div className='score-container'>
+              <p>Score: {currentScore}</p>
+              <p>High Score: {highScore}</p>
             </div>
-          )}
-          <div className='score-container'>
-            <p>Score: {currentScore}</p>
-            <p>High Score: {highScore}</p>
           </div>
-        </div>
-      </header>
-      <ul className="card-grid">
-        {cards.map((card) => (
-          <Card
-            key={card.id}
-            card={card}
-            onCardClick={handleCardClick}
-          />
-        ))}
-      </ul>
+        </header>
+        <ul className="card-grid">
+          {cards.map((card) => (
+            <Card
+              key={card.id}
+              card={card}
+              onCardClick={handleCardClick}
+              gameStatus={gameStatus}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }

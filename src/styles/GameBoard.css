@@ -12,7 +12,7 @@
 :root {
   --bg: aliceblue;
   --font: #333;
-  --purple: #663399;
+  --purple: #9966cc;
   --light-purple: #cc99ff;
   --super-light-purple: #d5a2ff;
   --limelight: LimeLight-Regular, Arial, Helvetica, sans-serif;
@@ -23,17 +23,24 @@ html {
   font-size: 10px;
 }
 
-body {
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   background-image: linear-gradient(var(--purple) 50%, var(--bg) 50%);
   background-size: 100% 4px;
 }
 
-.dark-bg {
+.wrapper.lost {
   background-image: linear-gradient(var(--purple) 50%, var(--font) 50%);
 }
 
+.wrapper.won {
+  background-image: linear-gradient(var(--light-purple) 50%, var(--bg) 50%);
+}
+
 .status-container {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,7 +108,7 @@ body {
 }
 
 .result {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-family: var(--limelight);
   color: var(--font);
 }
@@ -110,9 +117,7 @@ body {
 .try-again-btn {
   padding: 0.2rem 0.8rem;
   font-size: 1.6rem;
-  font-family: var(--limelight);
   color: var(--font);
-  background-color: var(--light-purple);
   border: none;
   border-radius: 0.4rem;
   box-shadow: 0.2rem 0.2rem 0.4rem var(--font);
@@ -152,11 +157,18 @@ body {
   width: 20rem;
 }
 
-.card img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 0.8rem;
+.card.won {
+  animation: rotate-card ease-out 1.5s;
+}
+
+@keyframes rotate-card {
+  from {
+    transform: rotate3d(1, 0, 0, 0);
+  }
+
+  to {
+    transform: rotate3d(1, 0, 0, 1turn);
+  }
 }
 
 .card button {
@@ -168,4 +180,13 @@ body {
 .card button:hover {
   opacity: 0.85;
 }
+
+.card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 0.8rem;
+}
+
+
 

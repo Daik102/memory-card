@@ -1,6 +1,6 @@
-function Card({ card, onCardClick }) {
+function Card({ card, onCardClick, gameStatus }) {
   return (
-    <li className="card">
+    <li className={`card ${gameStatus}`}>
       <button onClick={() => onCardClick(card.id)}>
         <img src={card.url} alt={card.alt} />
       </button>
