@@ -16,7 +16,7 @@ function shuffleArray(array) {
 function GameBoard() {
   const [cards, setCards] = useState([]);
   const [currentScore, setCurrentScore] = useState(0);
-  const [highScore, setHighScore] = useState(0);
+  const [hiScore, setHiScore] = useState(0);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [gameStatus, setGameStatus] = useState('playing');
@@ -77,8 +77,8 @@ function GameBoard() {
       const newScore = currentScore + 1;
       setCurrentScore(newScore);
 
-      if (newScore > highScore) {
-        setHighScore(newScore);
+      if (newScore > hiScore) {
+        setHiScore(newScore);
       }
 
       if (newScore === 12) {
@@ -92,6 +92,14 @@ function GameBoard() {
     setCards(shuffleArray(resetCards));
     setCurrentScore(0);
   };
+
+  let message = 'No Repeats!';
+
+  if (gameStatus === 'won') {
+    message = 'Nice Work!';
+  } else if (gameStatus === 'lost') {
+    message = 'Game Over!';
+  }
 
   if (loading) {
     return (
@@ -116,26 +124,27 @@ function GameBoard() {
 
   return (
     <div className={`wrapper ${gameStatus}`}>
-      <div className='game-board'>
+      <main className='game-board'>
         <header className='header'>
           <h1 className='game-title'>Odin Memory Card</h1>
           <div className='info-display'>
             <div className='spacer-left'></div>
-            {gameStatus === 'playing' && (
-              <div className='spacer-center'></div>
-            )}
-            {gameStatus !== 'playing' && (
-              <div className="modal">
-                <h2 className='result'>{gameStatus === 'won' ? 'Congratulations!' : 'Game Over!'}</h2>
+            <div className='message-container'>
+              <h2 className='message'>{message}</h2>
+              {gameStatus === 'playing' ? (
+                <button className='spacer-btn'>&nbsp;</button>
+              ) : (
                 <button className='play-again-btn' onClick={() => {
                   setGameStatus('playing');
                   handlePlayAgain();
-                }}>Play Again</button>
-              </div>
-            )}
+                }}>
+                  Play Again
+                </button>
+              )}
+            </div>
             <div className='score-container'>
-              <p>Score: {currentScore}</p>
-              <p>High Score: {highScore}</p>
+              <p>Score: <span className="score-num">{currentScore}</span></p>
+              <p>Hi-Score: <span className="score-num">{hiScore}</span></p>
             </div>
           </div>
         </header>
@@ -149,7 +158,10 @@ function GameBoard() {
             />
           ))}
         </ul>
-      </div>
+      </main>
+      <footer className="footer">
+        <p>Created for <a href="https://www.theodinproject.com" target="_blank" rel="noreferrer">The Odin Project</a> | <a href="https://daik102.github.io/homepage/" target="_blank" rel="noreferrer">2026 Daik</a></p>
+      </footer>
     </div>
   )
 }
