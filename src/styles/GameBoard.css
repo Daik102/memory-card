@@ -20,7 +20,7 @@
 }
 
 html {
-  font-size: clamp(50%, 1.2vw + 0.25rem, 62.5%);
+  font-size: clamp(50%, 1vw + 0.25rem, 62.5%);
 }
 
 .wrapper {
@@ -62,8 +62,7 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
-  max-width: 62rem;
+  width: min(90%, 62rem);
   margin: 2rem auto;
   padding: 2rem 0 0.8rem;
   background-color: var(--bg);
@@ -166,7 +165,7 @@ html {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(8rem, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.6rem;
   padding: 2rem;
   list-style-type: none;
@@ -213,7 +212,7 @@ html {
 
 .footer {
   margin-bottom: 2rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--limelight);
   font-size: 1.4rem;
   color: var(--bg);
 }
@@ -230,7 +229,7 @@ html {
 /* For Landscape / Tablet */
 @media screen and (min-width: 48em) {
   .game-board {
-    width: 100%;
+    width: min(100%, 62rem);
     padding: 2rem 0;
   }
 
@@ -261,6 +260,6 @@ html {
 /* For Desktop / Widescreen */
 @media screen and (min-width: 90em) and (orientation: landscape) {
   .game-board {
-    max-width: 80rem;
+    width: min(100%, 80rem);
   }
 }
