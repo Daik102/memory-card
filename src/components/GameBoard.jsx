@@ -160,7 +160,7 @@ function GameBoard() {
         </ul>
       </main>
       <footer className="footer">
-        <p>Created for <a href="https://www.theodinproject.com" target="_blank" rel="noreferrer">The Odin Project</a> | <a href="https://daik102.github.io/homepage/" target="_blank" rel="noreferrer">2026 Daik</a></p>
+        <p>All images are from <a href="https://unsplash.com/developers" target="_blank" rel="noreferrer">Unsplash API</a> | <a href="https://daik102.github.io/homepage/" target="_blank" rel="noreferrer">2026 Daik</a></p>
       </footer>
     </div>
   )
