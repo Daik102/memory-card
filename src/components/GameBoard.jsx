@@ -98,7 +98,7 @@ function GameBoard() {
   if (gameStatus === 'won') {
     message = 'Nice Work!';
   } else if (gameStatus === 'lost') {
-    message = 'Game Over!';
+    message = 'Game Over';
   }
 
   if (loading) {
