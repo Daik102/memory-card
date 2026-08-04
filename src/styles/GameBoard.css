@@ -226,6 +226,13 @@ html {
   opacity: 0.85;
 }
 
+/* For middle and large Smartphone */
+@media screen and (min-width: 22em) {
+  .info-display {
+    padding: 0 2.4rem;
+  }
+}
+
 /* For Landscape / Tablet */
 @media screen and (min-width: 48em) {
   .game-board {
