@@ -179,10 +179,6 @@ html {
   animation: rotate-card ease-out 1.5s;
 }
 
-.card.lost {
-  filter: grayscale(100%);
-}
-
 @keyframes rotate-card {
   from {
     transform: rotate3d(1, 0, 0, 0);
@@ -191,6 +187,10 @@ html {
   to {
     transform: rotate3d(1, 0, 0, 1turn);
   }
+}
+
+.card.lost {
+  filter: grayscale(100%);
 }
 
 .card button {
