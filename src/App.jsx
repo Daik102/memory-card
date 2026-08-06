@@ -2,10 +2,12 @@ import GameBoard from './components/GameBoard'
 import { Analytics } from '@vercel/analytics/react';
 
 function App() {
+  const isProduction = import.meta.env.PROD;
+
   return (
     <>
       <GameBoard></GameBoard>
-      <Analytics />
+      {isProduction && <Analytics />}
     </>
   )
 }
