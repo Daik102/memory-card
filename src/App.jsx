@@ -1,7 +1,7 @@
-import GameBoard from './components/GameBoard'
+import { GameBoard } from './components/GameBoard'
 import { Analytics } from '@vercel/analytics/react';
 
-function App() {
+export function App() {
   const isProduction = import.meta.env.PROD;
 
   return (
@@ -11,5 +11,3 @@ function App() {
     </>
   )
 }
-
-export default App
