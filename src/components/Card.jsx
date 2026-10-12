@@ -1,4 +1,4 @@
-function Card({ card, onCardClick, gameStatus }) {
+export function Card({ card, onCardClick, gameStatus }) {
   return (
     <li className={`card ${gameStatus}`}>
       <button onClick={() => onCardClick(card.id)}>
@@ -7,5 +7,3 @@ function Card({ card, onCardClick, gameStatus }) {
     </li>
   );
 }
-
-export default Card
