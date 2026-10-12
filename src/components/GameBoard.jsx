@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Card from './Card'
+import { Card } from './Card'
 import '../styles/GameBoard.css'
 
 function shuffleArray(array) {
@@ -13,7 +13,7 @@ function shuffleArray(array) {
   return shuffled;
 }
 
-function GameBoard() {
+export function GameBoard() {
   const [cards, setCards] = useState([]);
   const [currentScore, setCurrentScore] = useState(0);
   const [hiScore, setHiScore] = useState(0);
@@ -38,8 +38,8 @@ function GameBoard() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const result = await response.json();
-        const adjustedArray = result.results.map((item) => ({
+        const json = await response.json();
+        const adjustedArray = json.results.map((item) => ({
           id: item.id,
           alt: item.alt_description,
           url: item.urls.small,
@@ -91,6 +91,7 @@ function GameBoard() {
     const resetCards = cards.map((card) => ({ ...card, isClicked: false }));
     setCards(shuffleArray(resetCards));
     setCurrentScore(0);
+    setGameStatus('playing');
   };
 
   let message = 'No Repeats!';
@@ -128,23 +129,13 @@ function GameBoard() {
         <header className='header'>
           <h1 className='game-title'>Odin Memory Card</h1>
           <div className='info-display'>
-            <div className='spacer-left'></div>
             <div className='message-container'>
               <h2 className='message'>{message}</h2>
-              {gameStatus === 'playing' ? (
-                <button className='spacer-btn'>&nbsp;</button>
-              ) : (
-                <button className='play-again-btn' onClick={() => {
-                  setGameStatus('playing');
-                  handlePlayAgain();
-                }}>
-                  Play Again
-                </button>
-              )}
+              <button className={gameStatus === 'playing' ? 'hidden' : 'play-again-btn'} onClick={handlePlayAgain}>Play Again</button>
             </div>
             <div className='score-container'>
-              <p>Score: <span className="score-num">{currentScore}</span></p>
-              <p>Hi-Score: <span className="score-num">{hiScore}</span></p>
+              <p>Score:<span className="score">{currentScore}</span></p>
+              <p>Hi-Score:<span className="score">{hiScore}</span></p>
             </div>
           </div>
         </header>
@@ -160,10 +151,12 @@ function GameBoard() {
         </ul>
       </main>
       <footer className="footer">
-        <p>All images are from <a href="https://unsplash.com/developers" target="_blank" rel="noreferrer">Unsplash API</a> | <a href="https://daik102.github.io/homepage/" target="_blank" rel="noreferrer">2026 Daik</a></p>
+        <p>All images are from 
+          <a href="https://unsplash.com/developers" target="_blank" rel="noreferrer">Unsplash API</a>
+          <span>|</span>
+          <a href="https://daik102.github.io/homepage/" target="_blank" rel="noreferrer">2026 Daik</a>
+        </p>
       </footer>
     </div>
   )
 }
-
-export default GameBoard;
