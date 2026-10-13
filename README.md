@@ -5,7 +5,7 @@ This project is based on <a href="https://www.theodinproject.com/">The Odin Proj
 
 <h3>Features</h3>
 
-- Fetching beautiful images from <a href="https://unsplash.com/developers">Unsplash API</a> using useEffect
+- Rendering beautiful images from <a href="https://unsplash.com/developers">Unsplash API</a> using useEffect
 
 - Fisher-Yates shuffle algorithm for efficient deck randomization
 
