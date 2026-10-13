@@ -103,7 +103,7 @@ button {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   width: 100%;
-  min-height: 6rem;
+  margin: 0.4rem 0;
   padding: 0 2rem;
 }
 
@@ -224,7 +224,7 @@ button {
   }
 }
 
-/* Tablet and Desktop */
+/* Tablets */
 @media screen and (min-width: 48em) {
   html {
     font-size: 62.5%;
