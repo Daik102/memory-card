@@ -152,9 +152,9 @@ export function GameBoard() {
       </main>
       <footer className="footer">
         <p>All images are from 
-          <a href="https://unsplash.com/developers" target="_blank" rel="noreferrer">Unsplash API</a>
+          <a href="https://unsplash.com/developers">Unsplash API</a>
           <span>|</span>
-          <a href="https://daik102.github.io/homepage/" target="_blank" rel="noreferrer">2026 Daik</a>
+          <a href="https://daik102.github.io/homepage/">2026 Daik</a>
         </p>
       </footer>
     </div>
